@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>CarSparesShop</artifactId>
+        <groupId>com.dae</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>back-end</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>controller</module>
+        <module>core</module>
+        <module>facades</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-core</artifactId>
+                <version>3.5.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mattbertolini</groupId>
+                <artifactId>liquibase-slf4j</artifactId>
+                <version>1.2.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>3.5.1</version>
+                <configuration>
+                    <propertyFile>src/main/resources/db/liquibase.properties</propertyFile>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>make-unix-eol</id>
+                        <phase>prepare-package</phase>
+                        <configuration>
+                            <tasks>
+                                <fixcrlf srcdir="${project.build.outputDirectory}/db" eol="unix" includes="**/*.csv"/>
+                                <fixcrlf srcdir="${project.build.outputDirectory}/db" eol="unix" includes="**/*.xml"/>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
