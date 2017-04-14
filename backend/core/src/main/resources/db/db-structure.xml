@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
     <changeSet id="1" author="Arkadii_Dolgonos">
-        <createTable tableName="person">
+        <!--<createTable tableName="person">
             <column name="id" type="int">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
@@ -21,5 +21,143 @@
                           schemaName="public"
                           startWith="100"
                           tableName="person"/>
+                          -->
+        <createTable tableName="manufacturer">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(55)"/>
+            <column name="country" type="VARCHAR(55)"/>
+            <column name="website" type="VARCHAR(55)"/>
+            <column name="description" type="VARCHAR(255)"/>
+        </createTable>
+
+        <createTable tableName="product_group">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="level" type="int"/>
+            <column name="name" type="VARCHAR(55)"/>
+            <column name="parent_group_id" type="int">
+                <constraints nullable="true" foreignKeyName="product_group_parent_group_fk"
+                             referencedTableName="product_group" referencedColumnNames="id"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="contact">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="type" type="VARCHAR(55)"/>
+            <column name="value" type="VARCHAR(55)"/>
+            <column name="desc" type="VARCHAR(255)"/>
+        </createTable>
+
+        <createTable tableName="person">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(55)"/>
+            <column name="sername" type="VARCHAR(55)"/>
+            <column name="father_name" type="VARCHAR(55)"/>
+            <column name="date_birth" type="date"/>
+        </createTable>
+
+        <createTable tableName="person_contact_lnk">
+            <column name="person_id" type="int">
+                <constraints nullable="false" foreignKeyName="person_contact_lnk_personid_fk"
+                             referencedTableName="person" referencedColumnNames="id"/>
+            </column>
+            <column name="contact_id" type="int">
+                <constraints nullable="false" foreignKeyName="person_contact_lnk_contactid_fk"
+                             referencedTableName="contact" referencedColumnNames="id"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="provider">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="rating" type="int"/>
+            <column name="name" type="VARCHAR(55)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="provider_contact_lnk">
+            <column name="provider_id" type="int">
+                <constraints nullable="false" foreignKeyName="provider_contact_lnk_providerid_fk"
+                             referencedTableName="provider" referencedColumnNames="id"/>
+            </column>
+            <column name="contact_id" type="int">
+                <constraints nullable="false" foreignKeyName="provider_contact_lnk_contactid_fk"
+                             referencedTableName="contact" referencedColumnNames="id"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="product">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="strength" type="int"/>
+            <column name="name" type="VARCHAR(55)"/>
+            <column name="manufacturer_id" type="int">
+                <constraints nullable="false" foreignKeyName="product_manufacturerid_fk"
+                             referencedTableName="manufacturer" referencedColumnNames="id"/>
+            </column>
+            <column name="product_group_id" type="int">
+                <constraints nullable="false" foreignKeyName="product_productgroupid_fk"
+                             referencedTableName="product_group" referencedColumnNames="id"/>
+            </column>
+            <column name="product_lnk_id" type="int">
+                <constraints nullable="false" foreignKeyName="product_productlnk_fk"
+                             referencedTableName="product" referencedColumnNames="id"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="ext_product_model">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(55)"/>
+            <column name="desc" type="VARCHAR(2000)"/>
+            <column name="production_start" type="date"/>
+            <column name="production_end" type="date"/>
+        </createTable>
+
+        <createTable tableName="ext_product_brand">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(55)"/>
+            <column name="desc" type="VARCHAR(2000)"/>
+        </createTable>
+
+        <createTable tableName="ext_product">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="ext_product_brand_id" type="int">
+                <constraints nullable="false" foreignKeyName="ext_product_extproductbrand_fk"
+                             referencedTableName="ext_product_brand" referencedColumnNames="id"/>
+            </column>
+            <column name="ext_product_model_id" type="int">
+                <constraints nullable="false" foreignKeyName="ext_product_extproductmodel_fk"
+                             referencedTableName="ext_product_model" referencedColumnNames="id"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="product_extproduct_lnk">
+            <column name="product_id" type="int">
+                <constraints nullable="false" foreignKeyName="product_extproduct_lnk_productid_fk"
+                             referencedTableName="product" referencedColumnNames="id"/>
+            </column>
+            <column name="ext_product_id" type="int">
+                <constraints nullable="false" foreignKeyName="product_extproduct_lnk_extproductid_fk"
+                             referencedTableName="ext_product" referencedColumnNames="id"/>
+            </column>
+        </createTable>
+
+
     </changeSet>
 </databaseChangeLog>

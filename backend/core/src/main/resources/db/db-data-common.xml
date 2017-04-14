@@ -3,6 +3,20 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="init-data1" author="Arkadii Dolgonos" runOnChange="true">
+        <loadUpdateData tableName="ext_product_model" file="db/data/init/CarModels.csv"
+                        primaryKey="id"/>
+        <loadUpdateData tableName="ext_product_brand" file="db/data/init/CarBrands.csv"
+                        primaryKey="id"/>
+        <loadUpdateData tableName="ext_product" file="db/data/init/Cars.csv"
+                        primaryKey="id"/>
+        <loadUpdateData tableName="manufacturer" file="db/data/init/Manufacturers.csv"
+                        primaryKey="id"/>
+        <loadUpdateData tableName="product_group" file="db/data/init/Product_Group.csv"
+                        primaryKey="id"/>
+
+    </changeSet>
 
 </databaseChangeLog>
