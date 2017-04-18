@@ -1,7 +1,0 @@
-spring:
-      application:
-                 name: car-spares-shop
-
-server:
-      port: ${port:8126}
-      context-path: /car-shop-service

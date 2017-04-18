@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 
 @SpringBootApplication
-public class CarSparesShopApplicationLauncher {
+public class ShopApplicationLauncher {
 
     public static void main(String[] args) {
-        SpringApplication.run(CarSparesShopApplicationLauncher.class, args);
+        SpringApplication.run(ShopApplicationLauncher.class, args);
     }
 }

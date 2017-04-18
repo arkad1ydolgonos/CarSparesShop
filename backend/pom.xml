@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.dae</groupId>
-    <artifactId>car-shop-server</artifactId>
+    <artifactId>shop-server</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
 
@@ -17,9 +17,9 @@
     </parent>
 
     <modules>
-        <module>car-shop-service</module>
-        <module>car-shop-common</module>
-        <module>car-shop-client</module>
+        <module>shop-service</module>
+        <module>shop-common</module>
+        <module>shop-client</module>
     </modules>
 
     <properties>
