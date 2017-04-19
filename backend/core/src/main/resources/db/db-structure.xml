@@ -157,8 +157,6 @@
                 <constraints nullable="false" primaryKey="true" foreignKeyName="provider_person_lnk_personid_fk"
                              referencedTableName="Person" referencedColumnNames="id"/>
             </column>
-            <column name="position" type="VARCHAR(55)"/>
-            <column name="description" type="VARCHAR(255)"/>
         </createTable>
 
         <createTable tableName="Product_Provider_Lnk">
@@ -194,6 +192,27 @@
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="date_end" type="date"/>
+        </createTable>
+
+        <createTable tableName="Position">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(55)">
+                <constraints unique="true"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+        </createTable>
+
+        <createTable tableName="Person_Position_Lnk">
+            <column name="person_id" type="int">
+                <constraints nullable="false" primaryKey="true" foreignKeyName="person_position_lnk_personid_fk"
+                             referencedTableName="Person" referencedColumnNames="id"/>
+            </column>
+            <column name="position_id" type="int">
+                <constraints nullable="false" primaryKey="true" foreignKeyName="person_position_lnk_positionid_fk"
+                             referencedTableName="Position" referencedColumnNames="id"/>
+            </column>
         </createTable>
 
 

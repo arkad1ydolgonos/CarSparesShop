@@ -36,6 +36,8 @@
                         primaryKey="product_id,date_start"/>
         <loadUpdateData tableName="Product_Cost" file="db/data/init/Product_Cost.csv"
                         primaryKey="product_id,date_start"/>
+        <loadUpdateData tableName="Product_Provider_Lnk" file="db/data/init/Product_Provider_Lnk.csv"
+                        primaryKey="product_id,provider_id"/>
 
 
     </changeSet>
