@@ -1,0 +1,7 @@
+spring:
+      application:
+                 name: spares-shop
+
+server:
+      port: ${port:8126}
+      context-path: /shop-service
