@@ -171,6 +171,9 @@
         </createTable>
 
         <createTable tableName="Product_Price">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
             <column name="product_id" type="int">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="product_price_productid_fk"
                              referencedTableName="Product" referencedColumnNames="id"/>
@@ -183,6 +186,9 @@
         </createTable>
 
         <createTable tableName="Product_Cost">
+            <column name="id" type="int">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
             <column name="product_id" type="int">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="product_cost_productid_fk"
                              referencedTableName="Product" referencedColumnNames="id"/>

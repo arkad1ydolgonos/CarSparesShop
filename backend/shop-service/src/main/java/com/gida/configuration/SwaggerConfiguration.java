@@ -1,4 +1,4 @@
-package com.dae.configuration;
+package com.gida.configuration;
 
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -21,7 +21,7 @@ public class SwaggerConfiguration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.dae.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.gida.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

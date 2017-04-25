@@ -1,4 +1,4 @@
-package com.dae.controller;
+package com.gida.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

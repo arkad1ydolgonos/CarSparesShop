@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:utill="http://www.springframework.org/schema/util"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/util
+            http://www.springframework.org/schema/utill/spring-util.xsd
+            http://www.springframework.org/schema/data/jpa
+            http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <context:property-placeholder location="classpath*:app.properties"/>
+
+    <jpa:repositories base-package="com.gida.repositoriy" entity-manager-factory-ref="emf"
+                      transaction-manager-ref="transactionManager"/>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emf"/>
+    </bean>
+
+    <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <constructor-arg>
+            <ref bean="transactionManager"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"/>
+        </property>
+        <property name="packagesToScan" value="com.gida.models"/>
+        <property name="jpaProperties" ref="jpaProperties"/>
+    </bean>
+
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${db.driver}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${dp.username}"/>
+        <property name="password" value="${db.password}"/>
+    </bean>
+
+
+    <bean id="jpaProperties" class="org.springframework.beans.factory.config.MapFactoryBean">
+        <property name="sourceMap">
+            <props merge="true">
+                <prop key="hibernate.default_batch_fetch_size">100</prop>
+                <prop key="hibernate.default_batch_fetch_style">dynamic</prop>
+                <prop key="hibernate.connection.release_mode">on_close</prop>
+                <prop key="hibernate.dialect_resolvers">
+                    com.marks.pos.backoffice.core.persistence.DialectResolverExtended
+                </prop>
+                <prop key="hibernate.max_fetch_depth">3</prop>
+                <prop key="hibernate.hbm2ddl.auto">validate</prop>
+                <prop key="hibernate.jdbc.batch_size">50</prop>
+                <prop key="hibernate.jdbc.fetch_size">50</prop>
+                <prop key="hibernate.order_inserts">true</prop>
+                <prop key="hibernate.order_updates">true</prop>
+                <prop key="hibernate.connection.CharSet">utf8</prop>
+                <prop key="hibernate.connection.characterEncoding">utf8</prop>
+                <prop key="hibernate.connection.useUnicode">true</prop>
+                <prop key="hibernate.show_sql">${db.hibernate.show_sql}</prop>
+                <prop key="hibernate.format_sql">${db.hibernate.format_sql}</prop>
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory
+                </prop>
+                <prop key="hibernate.cache.use_second_level_cache">${db.hibernate.use_second_level_cache}
+                </prop>
+                <prop key="hibernate.cache.use_query_cache">
+                    ${db.hibernate.use_query_cache:db.hibernate.use_second_level_cache}
+                </prop>
+                <prop key="javax.persistence.sharedCache.mode">ENABLE_SELECTIVE</prop>
+                <prop key="hibernate.search.default.directory_provider">
+                    #{environment.acceptsProfiles('integrationTests') ? 'ram' :  'filesystem'}
+                </prop>
+
+                <prop key="hibernate.search.default.exclusive_index_use">false</prop>
+                <prop key="hibernate.search.default.locking_strategy">
+                    #{environment.acceptsProfiles('integrationTests') ? 'none' :  'native'}
+                </prop>
+                <prop key="hibernate.search.default.indexwriter.batch.max_buffered_docs">20</prop>
+                <prop key="hibernate.search.default.indexwriter.batch.max_field_length">100</prop>
+                <prop key="hibernate.search.default.indexwriter.batch.max_buffered_delete_terms">100</prop>
+                <prop key="hibernate.search.default.indexwriter.batch.max_merge_docs">1000</prop>
+                <prop key="hibernate.search.default.indexwriter.batch.merge_factor">20</prop>
+                <prop key="hibernate.search.default.indexwriter.batch.ram_buffer_size">64MB</prop>
+                <prop key="hibernate.search.default.indexwriter.batch.term_index_interval">128</prop>
+
+            </props>
+        </property>
+
+    </bean>
+
+</beans>
