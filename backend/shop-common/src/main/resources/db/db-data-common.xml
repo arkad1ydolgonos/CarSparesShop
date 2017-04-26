@@ -6,40 +6,36 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet id="init-data1" author="Arkadii Dolgonos" runOnChange="true">
-        <loadUpdateData tableName="Ext_Product_Model" file="db/data/init/CarModels.csv"
+        <loadUpdateData tableName="contact" file="db/data/init/Contact.csv"
                         primaryKey="id"/>
-        <loadUpdateData tableName="Ext_Product_Brand" file="db/data/init/CarBrands.csv"
+        <loadUpdateData tableName="ext_Product_Model" file="db/data/init/CarModels.csv"
                         primaryKey="id"/>
-        <loadUpdateData tableName="Ext_Product" file="db/data/init/Cars.csv"
+        <loadUpdateData tableName="ext_Product_Brand" file="db/data/init/CarBrands.csv"
                         primaryKey="id"/>
-        <loadUpdateData tableName="Manufacturer" file="db/data/init/Manufacturers.csv"
+        <loadUpdateData tableName="ext_Product" file="db/data/init/Cars.csv"
                         primaryKey="id"/>
-        <loadUpdateData tableName="Product_Group" file="db/data/init/Product_Group.csv"
+        <loadUpdateData tableName="manufacturer" file="db/data/init/Manufacturers.csv"
                         primaryKey="id"/>
-        <loadUpdateData tableName="Contact" file="db/data/init/Contact.csv"
+        <loadUpdateData tableName="product_Group" file="db/data/init/Product_Group.csv"
                         primaryKey="id"/>
-        <loadUpdateData tableName="Person" file="db/data/init/Person.csv"
+        <loadUpdateData tableName="person" file="db/data/init/Person.csv"
                         primaryKey="id"/>
-        <loadUpdateData tableName="Provider" file="db/data/init/Provider.csv"
+        <loadUpdateData tableName="provider" file="db/data/init/Provider.csv"
                         primaryKey="id"/>
-        <loadUpdateData tableName="Provider_Contact_Lnk" file="db/data/init/Provider_Contact_Lnk.csv"
-                        primaryKey="provider_id,contact_id"/>
-        <loadUpdateData tableName="Person_Contact_Lnk" file="db/data/init/Person_Contact_Lnk.csv"
+        <loadUpdateData tableName="person_Contact_Lnk" file="db/data/init/Person_Contact_Lnk.csv"
                         primaryKey="person_id,contact_id"/>
-        <loadUpdateData tableName="Provider_Person_Lnk" file="db/data/init/Provider_Person_Lnk.csv"
+        <loadUpdateData tableName="provider_Person_Lnk" file="db/data/init/Provider_Person_Lnk.csv"
                         primaryKey="provider_id,person_id"/>
-        <loadUpdateData tableName="Product" file="db/data/init/Product.csv"
+        <loadUpdateData tableName="product" file="db/data/init/Product.csv"
                         primaryKey="id"/>
-        <loadUpdateData tableName="Product_Extproduct_Lnk" file="db/data/init/Product_Extproduct_Lnk.csv"
+        <loadUpdateData tableName="product_Extproduct_Lnk" file="db/data/init/Product_Extproduct_Lnk.csv"
                         primaryKey="product_id,ext_product_id"/>
-        <loadUpdateData tableName="Product_Price" file="db/data/init/Product_Price.csv"
+        <loadUpdateData tableName="product_Price" file="db/data/init/Product_Price.csv"
                         primaryKey="product_id,date_start"/>
-        <loadUpdateData tableName="Product_Cost" file="db/data/init/Product_Cost.csv"
+        <loadUpdateData tableName="product_Cost" file="db/data/init/Product_Cost.csv"
                         primaryKey="product_id,date_start"/>
-        <loadUpdateData tableName="Product_Provider_Lnk" file="db/data/init/Product_Provider_Lnk.csv"
+        <loadUpdateData tableName="product_Provider_Lnk" file="db/data/init/Product_Provider_Lnk.csv"
                         primaryKey="product_id,provider_id"/>
-
-
     </changeSet>
 
 </databaseChangeLog>

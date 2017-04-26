@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 import java.util.Date;
 
 @Entity
-@Table(name = "Ext_Product_Model")
+@Table(name = "ext_Product_Model")
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = {"id"})

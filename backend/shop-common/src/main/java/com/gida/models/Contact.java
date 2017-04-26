@@ -16,11 +16,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Contact")
+@Table(name = "contact")
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode(exclude = "id")
+
 public class Contact {
     @Id
     @Column(name = "id")

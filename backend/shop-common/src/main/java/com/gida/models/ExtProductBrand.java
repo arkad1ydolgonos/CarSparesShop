@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Ext_Product_Brand")
+@Table(name = "ext_Product_Brand")
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = {"id"})

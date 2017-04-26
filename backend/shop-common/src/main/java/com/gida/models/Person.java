@@ -2,7 +2,9 @@ package com.gida.models;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -25,7 +27,9 @@ import java.util.List;
 @Table(name = "Person")
 @Getter
 @Setter
+@ToString
 @EqualsAndHashCode(exclude = "id")
+@NoArgsConstructor
 public class Person {
     @Id
     @Column(name = "id")
@@ -41,16 +45,16 @@ public class Person {
     @Temporal(TemporalType.DATE)
     private Date birthDate;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "Person_Position_Lnk",
+            name = "person_Position_Lnk",
             joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "position_id", referencedColumnName = "id"))
     private List<Position> positions;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "Person_Contact_Lnk",
+            name = "person_Contact_Lnk",
             joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "contact_id", referencedColumnName = "id"))
     private List<Contact> contacts;

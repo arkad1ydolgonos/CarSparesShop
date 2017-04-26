@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table(name = "Product_Cost")
+@Table(name = "product_Cost")
 @Getter
 @Setter
 @ToString

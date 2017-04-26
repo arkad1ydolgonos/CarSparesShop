@@ -21,7 +21,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "Product")
+@Table(name = "product")
 @Getter
 @Setter
 @ToString
@@ -43,13 +43,13 @@ public class Product {
     private ProductGroup productGroup;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "Product_Lnk",
+            name = "product_Lnk",
             joinColumns = @JoinColumn(name = "child_product_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "parent_product_id", referencedColumnName = "id"))
     private List<Product> childProducts;
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "Product_Lnk",
+            name = "product_Lnk",
             joinColumns = @JoinColumn(name = "parent_product_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "child_product_id", referencedColumnName = "id"))
     private List<Product> parentProducts;

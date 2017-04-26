@@ -17,7 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Ext_Product")
+@Table(name = "ext_Product")
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = {"brand", "model"})

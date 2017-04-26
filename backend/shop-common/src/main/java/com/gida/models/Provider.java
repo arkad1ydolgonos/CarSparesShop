@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "Provider")
+@Table(name = "provider")
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = "id")
@@ -34,21 +34,21 @@ public class Provider {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "Product_Provider_Lnk",
+            name = "product_Provider_Lnk",
             joinColumns = @JoinColumn(name = "provider_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private List<Product> productList;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "Provider_Person_Lnk",
+            name = "provider_Person_Lnk",
             joinColumns = @JoinColumn(name = "provider_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"))
     private List<Person> employees;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "Provider_Contact_Lnk",
+            name = "provider_Contact_Lnk",
             joinColumns = @JoinColumn(name = "provider_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "contact_id", referencedColumnName = "id"))
     private List<Contact> contacts;

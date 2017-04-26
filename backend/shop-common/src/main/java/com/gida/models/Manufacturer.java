@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Manufacturer")
+@Table(name = "manufacturer")
 @Getter
 @Setter
 @ToString

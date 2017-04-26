@@ -16,7 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Product_Group")
+@Table(name = "product_Group")
 @Getter
 @Setter
 @ToString

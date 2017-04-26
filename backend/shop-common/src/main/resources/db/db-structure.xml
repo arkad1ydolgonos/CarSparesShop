@@ -4,9 +4,100 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
-    <changeSet id="1" author="Arkadii_Dolgonos">
-        <createTable tableName="Manufacturer">
-            <column name="id" type="int">
+
+    <changeSet id="1" author="Arkadii Dolgonos">
+        <comment>Create sequence</comment>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_contact"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_extproduct_brand"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_extproduct_model"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_extproduct"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_manufacturer"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_person"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_person_contact_lnk"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_product"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_product_lnk"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_product_cost"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_product_extproduct_lnk"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_product_group"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_product_price"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_position"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_provider"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_provider_contact_lnk"
+                        startValue="1"/>
+        <createSequence catalogName="sequences"
+                        incrementBy="1"
+                        schemaName="public"
+                        sequenceName="seq_id_provider_person_lnk"
+                        startValue="1"/>
+
+    </changeSet>
+
+    <changeSet id="2" author="Arkadii_Dolgonos">
+        <createTable tableName="manufacturer">
+            <column name="id" type="int" defaultValueComputed="nextval('seq_id_manufacturer')">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(55)"/>
@@ -15,20 +106,20 @@
             <column name="description" type="VARCHAR(255)"/>
         </createTable>
 
-        <createTable tableName="Product_Group">
-            <column name="id" type="int">
+        <createTable tableName="product_Group">
+            <column name="id" type="int" defaultValueComputed="nextval('seq_id_product_group')">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="level" type="int"/>
             <column name="name" type="VARCHAR(55)"/>
             <column name="parent_group_id" type="int">
                 <constraints nullable="true" foreignKeyName="product_group_parent_group_fk"
-                             referencedTableName="Product_Group" referencedColumnNames="id"/>
+                             referencedTableName="product_Group" referencedColumnNames="id"/>
             </column>
         </createTable>
 
-        <createTable tableName="Contact">
-            <column name="id" type="int">
+        <createTable tableName="contact">
+            <column name="id" type="int" defaultValueComputed="nextval('seq_id_contact')">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="type" type="VARCHAR(55)"/>
@@ -36,8 +127,8 @@
             <column name="description" type="VARCHAR(255)"/>
         </createTable>
 
-        <createTable tableName="Person">
-            <column name="id" type="int">
+        <createTable tableName="person">
+            <column name="id" type="int" defaultValueComputed="nextval('seq_id_person')">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(55)"/>
@@ -46,19 +137,19 @@
             <column name="birth_date" type="date"/>
         </createTable>
 
-        <createTable tableName="Person_Contact_Lnk">
-            <column name="person_id" type="int">
+        <createTable tableName="person_Contact_Lnk">
+            <column name="person_id" type="int" defaultValueComputed="nextval('seq_id_person_contact_lnk')">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="person_contact_lnk_personid_fk"
-                             referencedTableName="Person" referencedColumnNames="id"/>
+                             referencedTableName="person" referencedColumnNames="id"/>
             </column>
             <column name="contact_id" type="int">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="person_contact_lnk_contactid_fk"
-                             referencedTableName="Contact" referencedColumnNames="id"/>
+                             referencedTableName="contact" referencedColumnNames="id"/>
             </column>
         </createTable>
 
-        <createTable tableName="Provider">
-            <column name="id" type="int">
+        <createTable tableName="provider">
+            <column name="id" type="int" defaultValueComputed="nextval('seq_id_provider')">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="rating" type="int"/>
@@ -67,46 +158,46 @@
             </column>
         </createTable>
 
-        <createTable tableName="Provider_Contact_Lnk">
-            <column name="provider_id" type="int">
+        <createTable tableName="provider_Contact_Lnk">
+            <column name="provider_id" type="int" defaultValueComputed="nextval('seq_id_provider_contact_lnk')">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="provider_contact_lnk_providerid_fk"
-                             referencedTableName="Provider" referencedColumnNames="id"/>
+                             referencedTableName="provider" referencedColumnNames="id"/>
             </column>
             <column name="contact_id" type="int">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="provider_contact_lnk_contactid_fk"
-                             referencedTableName="Contact" referencedColumnNames="id"/>
+                             referencedTableName="contact" referencedColumnNames="id"/>
             </column>
         </createTable>
 
-        <createTable tableName="Product">
-            <column name="id" type="int">
+        <createTable tableName="product">
+            <column name="id" type="int" defaultValueComputed="nextval('seq_id_product')">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="strength" type="int"/>
             <column name="name" type="VARCHAR(55)"/>
             <column name="manufacturer_id" type="int">
                 <constraints nullable="false" foreignKeyName="product_manufacturerid_fk"
-                             referencedTableName="Manufacturer" referencedColumnNames="id"/>
+                             referencedTableName="manufacturer" referencedColumnNames="id"/>
             </column>
             <column name="product_group_id" type="int">
                 <constraints nullable="false" foreignKeyName="product_productgroupid_fk"
-                             referencedTableName="Product_Group" referencedColumnNames="id"/>
+                             referencedTableName="product_Group" referencedColumnNames="id"/>
             </column>
         </createTable>
 
-        <createTable tableName="Product_Lnk">
-            <column name="child_product_id" type="int">
+        <createTable tableName="product_Lnk">
+            <column name="child_product_id" type="int" defaultValueComputed="nextval('seq_id_product_lnk')">
                 <constraints nullable="false" foreignKeyName="product_lnk_childproductid_fk"
-                             referencedTableName="Product" referencedColumnNames="id"/>
+                             referencedTableName="product" referencedColumnNames="id"/>
             </column>
             <column name="parent_product_id" type="int">
                 <constraints nullable="false" foreignKeyName="product_lnk_parentproductid_fk"
-                             referencedTableName="Product" referencedColumnNames="id"/>
+                             referencedTableName="product" referencedColumnNames="id"/>
             </column>
         </createTable>
 
-        <createTable tableName="Ext_Product_Model">
-            <column name="id" type="int">
+        <createTable tableName="ext_Product_Model">
+            <column name="id" type="int" defaultValueComputed="nextval('seq_id_extproduct_model')">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(55)"/>
@@ -115,68 +206,68 @@
             <column name="production_end" type="date"/>
         </createTable>
 
-        <createTable tableName="Ext_Product_Brand">
-            <column name="id" type="int">
+        <createTable tableName="ext_Product_Brand">
+            <column name="id" type="int" defaultValueComputed="nextval('seq_id_extproduct_brand')">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(55)"/>
             <column name="description" type="VARCHAR(2000)"/>
         </createTable>
 
-        <createTable tableName="Ext_Product">
-            <column name="id" type="int">
+        <createTable tableName="ext_Product">
+            <column name="id" type="int" defaultValueComputed="nextval('seq_id_extproduct')">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="ext_product_brand_id" type="int">
                 <constraints nullable="false" foreignKeyName="ext_product_extproductbrand_fk"
-                             referencedTableName="Ext_Product_Brand" referencedColumnNames="id"/>
+                             referencedTableName="ext_Product_Brand" referencedColumnNames="id"/>
             </column>
             <column name="ext_product_model_id" type="int">
                 <constraints nullable="false" foreignKeyName="ext_product_extproductmodel_fk"
-                             referencedTableName="Ext_Product_Model" referencedColumnNames="id"/>
+                             referencedTableName="ext_Product_Model" referencedColumnNames="id"/>
             </column>
         </createTable>
 
-        <createTable tableName="Product_Extproduct_Lnk">
-            <column name="product_id" type="int">
+        <createTable tableName="product_Extproduct_Lnk">
+            <column name="product_id" type="int" defaultValueComputed="nextval('seq_id_product_extproduct_lnk')">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="product_extproduct_lnk_productid_fk"
-                             referencedTableName="Product" referencedColumnNames="id"/>
+                             referencedTableName="product" referencedColumnNames="id"/>
             </column>
             <column name="ext_product_id" type="int">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="product_extproduct_lnk_extproductid_fk"
-                             referencedTableName="Ext_Product" referencedColumnNames="id"/>
+                             referencedTableName="ext_Product" referencedColumnNames="id"/>
             </column>
         </createTable>
 
-        <createTable tableName="Provider_Person_Lnk">
-            <column name="provider_id" type="int">
+        <createTable tableName="provider_Person_Lnk">
+            <column name="provider_id" type="int" defaultValueComputed="nextval('seq_id_provider_person_lnk')">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="provider_person_lnk_providerid_fk"
-                             referencedTableName="Provider" referencedColumnNames="id"/>
+                             referencedTableName="provider" referencedColumnNames="id"/>
             </column>
             <column name="person_id" type="int">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="provider_person_lnk_personid_fk"
-                             referencedTableName="Person" referencedColumnNames="id"/>
+                             referencedTableName="person" referencedColumnNames="id"/>
             </column>
         </createTable>
 
-        <createTable tableName="Product_Provider_Lnk">
+        <createTable tableName="product_Provider_Lnk">
             <column name="product_id" type="int">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="product_provider_lnk_productid_fk"
-                             referencedTableName="Product" referencedColumnNames="id"/>
+                             referencedTableName="product" referencedColumnNames="id"/>
             </column>
             <column name="provider_id" type="int">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="product_provider_lnk_providerid_fk"
-                             referencedTableName="Provider" referencedColumnNames="id"/>
+                             referencedTableName="provider" referencedColumnNames="id"/>
             </column>
         </createTable>
 
-        <createTable tableName="Product_Price">
-            <column name="id" type="int">
+        <createTable tableName='product_Price'>
+            <column name="id" type="int" defaultValueComputed="nextval('seq_id_product_price')">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="product_id" type="int">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="product_price_productid_fk"
-                             referencedTableName="Product" referencedColumnNames="id"/>
+                             referencedTableName="product" referencedColumnNames="id"/>
             </column>
             <column name="price" type="MONEY"/>
             <column name="date_start" type="date">
@@ -185,13 +276,13 @@
             <column name="date_end" type="date"/>
         </createTable>
 
-        <createTable tableName="Product_Cost">
-            <column name="id" type="int">
+        <createTable tableName="product_Cost">
+            <column name="id" type="int" defaultValueComputed="nextval('seq_id_product_cost')">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="product_id" type="int">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="product_cost_productid_fk"
-                             referencedTableName="Product" referencedColumnNames="id"/>
+                             referencedTableName="product" referencedColumnNames="id"/>
             </column>
             <column name="price" type="MONEY"/>
             <column name="date_start" type="date">
@@ -200,8 +291,8 @@
             <column name="date_end" type="date"/>
         </createTable>
 
-        <createTable tableName="Position">
-            <column name="id" type="int">
+        <createTable tableName="position">
+            <column name="id" type="int" defaultValueComputed="nextval('seq_id_position')">
                 <constraints nullable="false" primaryKey="true"/>
             </column>
             <column name="name" type="VARCHAR(55)">
@@ -210,17 +301,19 @@
             <column name="description" type="VARCHAR(255)"/>
         </createTable>
 
-        <createTable tableName="Person_Position_Lnk">
+        <createTable tableName="person_Position_Lnk">
             <column name="person_id" type="int">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="person_position_lnk_personid_fk"
-                             referencedTableName="Person" referencedColumnNames="id"/>
+                             referencedTableName="person" referencedColumnNames="id"/>
             </column>
             <column name="position_id" type="int">
                 <constraints nullable="false" primaryKey="true" foreignKeyName="person_position_lnk_positionid_fk"
-                             referencedTableName="Position" referencedColumnNames="id"/>
+                             referencedTableName="position" referencedColumnNames="id"/>
             </column>
         </createTable>
 
 
     </changeSet>
+
+
 </databaseChangeLog>
