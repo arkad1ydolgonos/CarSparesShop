@@ -2,10 +2,12 @@ package com.gida.repositoriy;
 
 import com.gida.models.Contact;
 import com.gida.models.enums.ContactType;
+import com.github.springtestdbunit.annotation.DatabaseSetup;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,8 @@ import static org.junit.Assert.assertEquals;
 
 @ContextConfiguration(value = {"classpath:app-context-common.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
+//@TestExecutionListeners
+@DatabaseSetup("")
 public class ContactRepositoryTest {
 
     @Autowired
